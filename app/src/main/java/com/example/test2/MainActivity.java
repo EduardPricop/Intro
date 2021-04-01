@@ -1,5 +1,6 @@
 package com.example.test2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
@@ -8,12 +9,21 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private OnboardingAdapter onboardingAdapter;
     private LinearLayout layoutOnboardingIndicators;
     private MaterialButton buttonOnboardingAction;
+
+    EditText emailId, password;
+    Button btnSignup;
+    TextView tvSignIn;
+    FirebaseAuth mFirebaseAuth;
+
 
 
     @SuppressLint("WrongViewCast")
@@ -48,16 +64,19 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 setCurrentOnboardingIndicator(position);
+
+
+
             }
         });
 
-        buttonOnboardingAction.setOnClickListener(new View.OnClickListener() {
+        buttonOnboardingAction.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(onboardingViewPager.getCurrentItem() + 1 <onboardingAdapter.getItemCount()){
                     onboardingViewPager.setCurrentItem(onboardingViewPager.getCurrentItem() + 1);
                 }else{
-                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity2.class));
                     finish();
                 }
             }
@@ -70,19 +89,19 @@ public class MainActivity extends AppCompatActivity {
         List<OnboardingItem> onboardingItems = new ArrayList<>();
 
         OnboardingItem itemPayOnline = new OnboardingItem();
-        itemPayOnline.setTitle("Pay Your Bill Online");
-        itemPayOnline.setDescription("Electric bill payment is a feature of online, mobile and telephone banking.");
-        itemPayOnline.setImage(R.drawable.pay_online);
+        itemPayOnline.setTitle("Luptă pentru progres, nu pentru perfecțiune.");
+        itemPayOnline.setDescription("Trebuie să păstrezi o gândire pozitivă și să-ți repeți că poți continua acest program, chiar dacă este greu, chiar dacă te simți obosit după 40 de repetări, chiar dacă ai transpirat și te simți epuizat. Scuzele nu vă definesc, nici nu te ajută.");
+        itemPayOnline.setImage(R.drawable.intro);
 
         OnboardingItem itemOnTheWay = new OnboardingItem();
-        itemOnTheWay.setTitle("Your Food Is On The Way");
-        itemOnTheWay.setDescription("Our delivery rider is on the way to deliver your order.");
-        itemOnTheWay.setImage(R.drawable.on_the_way);
+        itemOnTheWay.setTitle("Transformarea nu este un eveniment viitor, ci o activitate prezentă.");
+        itemOnTheWay.setDescription("Care a fost scopul tău? Amintește-ți: nu ai început să te antrenezi la întâmplare. Așadar, trebuie să-ți furnizezi motivele necesare, care te-au convins să începi programul de antrenament.");
+        itemOnTheWay.setImage(R.drawable.illustration);
 
         OnboardingItem itemEatTogether = new OnboardingItem();
-        itemEatTogether.setTitle("Eat Together");
-        itemEatTogether.setDescription("Enjoy your meal and have a great day. Don't forget to rate us.");
-        itemEatTogether.setImage(R.drawable.eat_together);
+        itemEatTogether.setTitle("Nu-ți spun că va fi ușor, dar cu siguranță va merita.");
+        itemEatTogether.setDescription("Nu îți sculptezi doar corpul, ci și creierul! Când te provoci, îți îmbunătățești corpul și atitudinea.");
+        itemEatTogether.setImage(R.drawable.banner);
 
         onboardingItems.add(itemPayOnline);
         onboardingItems.add(itemOnTheWay);

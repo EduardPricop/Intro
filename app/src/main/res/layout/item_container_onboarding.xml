@@ -9,29 +9,44 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+
     <ImageView
         android:id="@+id/imageOnboarding"
         android:layout_width="260dp"
         android:layout_height="260dp"
         android:layout_margin="15dp"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/app_name"/>
+        android:contentDescription="@string/app_name" />
 
     <TextView
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:gravity="center"
         android:textColor="@color/colorTextPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="_________________________"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="17sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/textDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:textColor="@color/colorTextSecondary"
-        android:textSize="18sp"/>
-    
+        android:textSize="17sp"
+        android:textStyle="italic" />
+
 </LinearLayout>
